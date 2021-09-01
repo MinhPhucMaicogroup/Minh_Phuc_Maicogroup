@@ -42,6 +42,7 @@ def read_symbol():
     dic_sym = dict()
     for line in read_file:
         if(line == ""):
+            read_file.close()
             return dic_sym
         List = line.split(":")
         List[0] = List[0].strip()
