@@ -1,18 +1,18 @@
 import math
 from os import read
-def check_prime_number(n):
-    if n == 2:
+def checkPrimeNumber(number):
+    if number == 2:
         return True
-    elif n<2:
+    elif number<2:
         return False
     else:
-        for i in range(2,math.floor(math.sqrt(n))+1): #kiem tra neu n chia het cho 1 so trong khoang tu
-            if(n%i == 0):                             #2 -> sqrt(n)
+        for i in range(2,math.floor(math.sqrt(number))+1): #kiem tra neu n chia het cho 1 so trong khoang tu
+            if(number%i == 0):                             #2 -> sqrt(n)
                 return False
     return True
 
 
-def uoc_chung_lon_nhat(a,b):
+def greatestCommonDivisor(a,b):
     while(a*b != 0):
         if(a>b):
             a%=b
@@ -21,47 +21,47 @@ def uoc_chung_lon_nhat(a,b):
     return a+b 
 
 
-def Boi_chung_nho_nhat(a,b):
+def lowestCommonMultiply(a,b):
     product = a*b
-    result = product//uoc_chung_lon_nhat(a,b)
+    result = product//greatestCommonDivisor(a,b)
     return result
 
 
 def Pyramid(n):
-    number_of_star = 1+ 2*(n-1)
+    numberOfStars = 1+ 2*(n-1)
     for i in range(0,n):
         str = "" 
         for j in range(0,i):
             str += " " 
-        for k in range(i,number_of_star-i):
+        for k in range(i,numberOfStars-i):
             str+= "*"
         print(str)
 
-def read_symbol():
-    read_file = open("Nhap_mon_Python/kyhieu.txt","r")
-    dic_sym = dict()
-    for line in read_file:
+def readSymbol():
+    readFile = open("Nhap_mon_Python/kyhieu.txt","r")
+    dicSym = dict()
+    for line in readFile:
         if(line == ""):
-            read_file.close()
-            return dic_sym
+            readFile.close()
+            return dicSym
         List = line.split(":")
         List[0] = List[0].strip()
         List[1] = List[1].strip()
-        dic_sym[List[0]] = List[1]
-    return dic_sym
+        dicSym[List[0]] = List[1]
+    return dicSym
 
 
-def weather_forecast(day,date,next_n_days):
-    read_file = open("Nhap_mon_Python/dubaothoitiet.txt","r") 
+def weatherForecast(day,date,next_n_Days):
+    readFile = open("Nhap_mon_Python/dubaothoitiet.txt","r") 
     flag = False 
-    day_of_week = ("monday", "tuesday","wednesday","thursday","friday","saturday", "sunday")
-    weather = read_symbol()
-    idx = day_of_week.index(day)
+    dayOfWeek = ("monday", "tuesday","wednesday","thursday","friday","saturday", "sunday")
+    weather = readSymbol()
+    idx = dayOfWeek.index(day)
 
-    for line in read_file:
+    for line in readFile:
         if(date in line):
             flag = True 
-            line = read_file.readline()
+            line = readFile.readline()
             for i in range(0,next_n_days):
                 idx+=1
                 if(idx == 7):
@@ -74,22 +74,22 @@ def weather_forecast(day,date,next_n_days):
                 #VD: line = 11/9/2022:S => arr= ['11/9/2022','S']
                 arr[1] = weather[arr[1]]
                 line = ':'.join(arr)
-                convert_day = day_of_week[idx]
-                print(f'{convert_day} - {line}')
-                line = read_file.readline()
+                convertDay = dayOfWeek[idx]
+                print(f'{convertDay} - {line}')
+                line = readFile.readline()
         if(flag == True):
             break
 
     if(flag == False): #neu du lieu yeu cau khong xuat hien trong file
         print('No information')
-    read_file.close()
+    readFile.close()
 
 
 if __name__ == "__main__":
     #Bai 1
-    print("Exercise 1: kiem tra so nguye to, tra ve True neu do la so nguyen, nguoc lai tra ve False")
+    print("Exercise 1: kiem tra so nguyen to, tra ve True neu do la so nguyen, nguoc lai tra ve False")
     num = int(input("input a number: "))
-    if(check_prime_number(num)== True):
+    if(checkPrimeNumber(num)== True):
         print(f"{num} is a prime number")
     else:
         print(f"{num} is not a prime number")
@@ -99,7 +99,9 @@ if __name__ == "__main__":
     print("Input 2 numbers a and b: ")
     a = int(input("input a: "))
     b = int(input("input b: "))
-    print(f"least common multiple of a and b: {Boi_chung_nho_nhat(a,b)}")
+    a = abs(a) if a<0 else a
+    b = abs(b) if b<0 else b
+    print(f"lowest common multiply of a and b: {lowestCommonMultiply(a,b)}")
 
     #Bai 3
     print("Exercise 3: Xuat ra man hinh mot kim tu thap, co tham so truyen vao bang so tang, tang duoi it hon tang tren")
@@ -118,5 +120,5 @@ if __name__ == "__main__":
     day = day.strip()
     date = date.strip()
     next_n_days = int(input("n = "))
-    weather_forecast(day,date,next_n_days)
+    weatherForecast(day,date,next_n_days)
 
