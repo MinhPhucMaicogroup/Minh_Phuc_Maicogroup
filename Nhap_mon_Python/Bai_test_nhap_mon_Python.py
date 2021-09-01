@@ -12,7 +12,7 @@ def check_prime_number(n):
     return True
 
 
-def UCLN(a,b):
+def uoc_chung_lon_nhat(a,b):
     while(a*b != 0):
         if(a>b):
             a%=b
@@ -21,9 +21,9 @@ def UCLN(a,b):
     return a+b 
 
 
-def BCNN(a,b):
+def Boi_chung_nho_nhat(a,b):
     prod = a*b
-    result = prod//UCLN(a,b) #BCNN(a,b) = (a*b)/UCLN(a,b)
+    result = prod//uoc_chung_lon_nhat(a,b) #BCNN(a,b) = (a*b)/UCLN(a,b)
     return result
 
 
@@ -78,7 +78,7 @@ def weather_forecast(day,date,next_n_days):
 
 if __name__ == "__main__":
     #Bai 1
-    print("Exercise 1")
+    print("Exercise 1: kiem tra so nguye to, tra ve True neu do la so nguyen, nguoc lai tra ve False")
     num = int(input("input a number: "))
     if(check_prime_number(num)== True):
         print(f"{num} is a prime number")
@@ -86,19 +86,25 @@ if __name__ == "__main__":
         print(f"{num} is not a prime number")
 
     #Bai 2
-    print("Exercise 2")
-    a,b = input("input two numbers: ").split()
-    a = int(a)
-    b = int(b)
-    print(f"least common multiple of a and b: {BCNN(a,b)}")
+    print("Exercise 2: nhap 2 so nguyen va tim boi chung nho nhat cua 2 so do")
+    print("Input 2 numbers a and b: ")
+    a = int(input("input a: "))
+    b = int(input("input b: "))
+    print(f"least common multiple of a and b: {Boi_chung_nho_nhat(a,b)}")
 
     #Bai 3
-    print("Exercise 3")
-    level = int(input("Input number of level of a pyramid: "))
+    print("Exercise 3: Xuat ra man hinh mot kim tu thap, co tham so truyen vao bang so tang, tang duoi it hon tang tren")
+    level = int(input("Input level of a pyramid: "))
     pyramid(level)
 
     #Bai 4
-    print("Exercise 4")
+    print("Exercise 4: Cho cac du bao thoi tiet cho 30 ngay,nhap thong tin thu - ngay - thang - nam cua hom nay de yeu cau chuong trinh dua ra du bao cua n ngay tiep theo")
+    print("Cac ky hieu thoi tiet duoc chu thich trong file ky hieu.txt")
+    print("Vi du: Today: wednesday - 11/9/2022")
+    print("n = 2 ")
+    print("weather forecast for 2 day: ")
+    print("thursday - 12/9/2022: fog")
+    print("friday - 13/9/2022: sunny")
     day,date = input("Today: ").split("-")
     day = day.strip()
     date = date.strip()
