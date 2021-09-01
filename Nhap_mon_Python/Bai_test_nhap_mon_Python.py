@@ -8,7 +8,7 @@ def check_prime_number(n):
     else:
         for i in range(2,math.floor(math.sqrt(n))+1): #kiem tra neu n chia het cho 1 so trong khoang tu
             if(n%i == 0):                             #2 -> sqrt(n)
-                return False #neu n chia het cho i thi n khong phai la so nguyen to tra ve False
+                return False
     return True
 
 
@@ -18,7 +18,7 @@ def UCLN(a,b):
             a%=b
         else:
             b%=a
-    return a+b #mot trong 2 a va b se bang 0 nen dung phep cong de tinh ket qua
+    return a+b 
 
 
 def BCNN(a,b):
@@ -30,51 +30,50 @@ def BCNN(a,b):
 def pyramid(n):
     number_of_star = 1+ 2*(n-1) #so luong toi da cua "*" trong 1 hang VD: n =3 => so luong toi da la 5
     for i in range(0,n):
-        str = "" #khoi tao string rong 
+        str = "" 
         for j in range(0,i):
-            str += " " #cach i dong
+            str += " " 
         for k in range(i,number_of_star-i):
             str+= "*"
-        print(str)#xuat string
+        print(str)
 
 
 def weather_forecast(day,date,next_n_days):
-    read_file = open("Nhap_mon_Python/dubaothoitiet.txt","r") #mo file va chon mode doc file
-    flag = False #khoi toan bien bool flag
+    read_file = open("Nhap_mon_Python/dubaothoitiet.txt","r") 
+    flag = False 
     day_of_week = {"monday": 0, "tuesday": 1,"wednesday": 2,"thursday": 3,"friday": 4,"saturday":5, "sunday": 6}
-    value_list = list(day_of_week.values()) #khoi tao 1 list chua cac value trong dictionary day_of_week
-    key_list = list(day_of_week.keys())#khoi tao 1 list chua cac key trong dictionary day_of_week
-    weather = {'S': 'sunny','C': 'cloudy','D': 'drizzle','F':'fog','R':'rain'}#khoi tao 1 dictionary dua theo file kyhieu.txt
-    idx = day_of_week[day]  #khoi tao bien idx de chuyen so ngay sang kieu int VD: monday => idx =0
+    value_list = list(day_of_week.values())
+    key_list = list(day_of_week.keys())
+    weather = {'S': 'sunny','C': 'cloudy','D': 'drizzle','F':'fog','R':'rain'}
+    idx = day_of_week[day]
 
     for line in read_file:
-        if(date in line): #neu dd/mm/year xuat hien khi doc tren 1 dong
-            flag = True  # dat gia tri bien flag = True
-            line = read_file.readline() #doc dong tiep theo
-            for i in range(0,next_n_days): #vong lap de doc n dong cua ngay tiep theo
+        if(date in line):
+            flag = True 
+            line = read_file.readline()
+            for i in range(0,next_n_days):
                 idx+=1
                 if(idx == 7): #neu idx = 7 thi chuyen sang monday bang cach cho idx = 0 
                     idx = 0
-                if(line == ''): #neu da doc toi cuoi file thi dung
+                if(line == ''): #neu doc toi cuoi file thi dung
                     print('No information')
                     break
-                line = line.strip() #xoa cac ky tu khoang trang,/t, /n o dau va cuoi file
-                arr =  line.split(':') # tach du lieu thanh 2 de xu ly
+                line = line.strip()
+                arr =  line.split(':')
                 #VD: line = 11/9/2022:S => arr= ['11/9/2022','S']
-                arr[1] = weather[arr[1]] #thay doi 'S' thanh 'sunny' dua vao dictionary weather
+                arr[1] = weather[arr[1]]
                 line = ':'.join(arr) #noi list thanh 1 chuoi phan tach nhau bang dau ':'
-                convert_day = value_list.index(idx) #chuyen integer idx sang thu 
-                #VD: 0 => monday, 1=> tuesday,...
-                print(f'{key_list[convert_day]} - {line}') #xuat ra man hinh bang cach dinh dang chuoi
-                line = read_file.readline() #doc dong tiep theo
-        if(flag == True): #sau khi da doc xong, chuong trinh co the doc het toi cuoi file
-            #nen de tiet kien thoi gian, thi bien flag se cho biet minh thuc hien xong yeu cau 
-            # va thoat khoi vong lap thay vi doc het toi cuoi file
+                convert_day = value_list.index(idx)
+                print(f'{key_list[convert_day]} - {line}')
+                line = read_file.readline()
+        if(flag == True): #sau khi da doc xong, chuong trinh se doc toi cuoi file
+            #de tiet kien thoi gian, thi bien flag se cho biet minh da thuc hien xong yeu cau 
+            #va thoat khoi vong lap
             break
 
-    if(flag == False): #neu du lieu yeu cau khong xuat hien trong file thi se xuat ra 'khong co thong tin"
+    if(flag == False): #neu du lieu yeu cau khong xuat hien trong file
         print('No information')
-    read_file.close() #dong file
+    read_file.close()
 
 
 if __name__ == "__main__":
