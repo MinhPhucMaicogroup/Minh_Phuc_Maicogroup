@@ -6,7 +6,7 @@ def checkPrimeNumber(number):
     elif number<2:
         return False
     else:
-        for i in range(2,math.floor(math.sqrt(number))+1): #kiem tra neu n chia het cho 1 so trong khoang tu
+        for i in range(2,math.floor(math.sqrt(number))+1): #kiem tra neu n chia het trong khoang tu
             if(number%i == 0):                             #2 -> sqrt(n)
                 return False
     return True
