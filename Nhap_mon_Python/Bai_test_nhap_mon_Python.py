@@ -27,7 +27,7 @@ def lowestCommonMultiply(a,b):
     return result
 
 
-def Pyramid(n):
+def DrawPyramid(n):
     numberOfStars = 1+ 2*(n-1)
     for i in range(0,n):
         str = "" 
@@ -54,9 +54,9 @@ def readSymbol():
 def weatherForecast(day,date,next_n_Days):
     readFile = open("Nhap_mon_Python/dubaothoitiet.txt","r") 
     flag = False 
-    dayOfWeek = ("monday", "tuesday","wednesday","thursday","friday","saturday", "sunday")
+    DAY_OF_WEEK = ("monday", "tuesday","wednesday","thursday","friday","saturday", "sunday")
     weather = readSymbol()
-    idx = dayOfWeek.index(day)
+    idx = DAY_OF_WEEK.index(day)
 
     for line in readFile:
         if(date in line):
@@ -74,7 +74,7 @@ def weatherForecast(day,date,next_n_Days):
                 #VD: line = 11/9/2022:S => arr= ['11/9/2022','S']
                 arr[1] = weather[arr[1]]
                 line = ':'.join(arr)
-                convertDay = dayOfWeek[idx]
+                convertDay = DAY_OF_WEEK[idx]
                 print(f'{convertDay} - {line}')
                 line = readFile.readline()
         if(flag == True):
@@ -106,7 +106,7 @@ if __name__ == "__main__":
     #Bai 3
     print("Exercise 3: Xuat ra man hinh mot kim tu thap, co tham so truyen vao bang so tang, tang duoi it hon tang tren")
     level = int(input("Input level of a pyramid: "))
-    Pyramid(level)
+    DrawPyramid(level)
 
     #Bai 4
     print("Exercise 4: Cho cac du bao thoi tiet cho 30 ngay,nhap thong tin thu - ngay - thang - nam cua hom nay de yeu cau chuong trinh dua ra du bao cua n ngay tiep theo")
