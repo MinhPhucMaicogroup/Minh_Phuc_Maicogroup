@@ -22,13 +22,13 @@ def uoc_chung_lon_nhat(a,b):
 
 
 def Boi_chung_nho_nhat(a,b):
-    prod = a*b
-    result = prod//uoc_chung_lon_nhat(a,b) #BCNN(a,b) = (a*b)/UCLN(a,b)
+    product = a*b
+    result = product//uoc_chung_lon_nhat(a,b)
     return result
 
 
-def pyramid(n):
-    number_of_star = 1+ 2*(n-1) #so luong toi da cua "*" trong 1 hang VD: n =3 => so luong toi da la 5
+def Pyramid(n):
+    number_of_star = 1+ 2*(n-1)
     for i in range(0,n):
         str = "" 
         for j in range(0,i):
@@ -37,15 +37,25 @@ def pyramid(n):
             str+= "*"
         print(str)
 
+def read_symbol():
+    read_file = open("Nhap_mon_Python/kyhieu.txt","r")
+    dic_sym = dict()
+    for line in read_file:
+        if(line == ""):
+            return dic_sym
+        List = line.split(":")
+        List[0] = List[0].strip()
+        List[1] = List[1].strip()
+        dic_sym[List[0]] = List[1]
+    return dic_sym
+
 
 def weather_forecast(day,date,next_n_days):
     read_file = open("Nhap_mon_Python/dubaothoitiet.txt","r") 
     flag = False 
-    day_of_week = {"monday": 0, "tuesday": 1,"wednesday": 2,"thursday": 3,"friday": 4,"saturday":5, "sunday": 6}
-    value_list = list(day_of_week.values())
-    key_list = list(day_of_week.keys())
-    weather = {'S': 'sunny','C': 'cloudy','D': 'drizzle','F':'fog','R':'rain'}
-    idx = day_of_week[day]
+    day_of_week = ("monday", "tuesday","wednesday","thursday","friday","saturday", "sunday")
+    weather = read_symbol()
+    idx = day_of_week.index(day)
 
     for line in read_file:
         if(date in line):
@@ -53,22 +63,20 @@ def weather_forecast(day,date,next_n_days):
             line = read_file.readline()
             for i in range(0,next_n_days):
                 idx+=1
-                if(idx == 7): #neu idx = 7 thi chuyen sang monday bang cach cho idx = 0 
+                if(idx == 7):
                     idx = 0
-                if(line == ''): #neu doc toi cuoi file thi dung
+                if(line == ""):
                     print('No information')
                     break
                 line = line.strip()
                 arr =  line.split(':')
                 #VD: line = 11/9/2022:S => arr= ['11/9/2022','S']
                 arr[1] = weather[arr[1]]
-                line = ':'.join(arr) #noi list thanh 1 chuoi phan tach nhau bang dau ':'
-                convert_day = value_list.index(idx)
-                print(f'{key_list[convert_day]} - {line}')
+                line = ':'.join(arr)
+                convert_day = day_of_week[idx]
+                print(f'{convert_day} - {line}')
                 line = read_file.readline()
-        if(flag == True): #sau khi da doc xong, chuong trinh se doc toi cuoi file
-            #de tiet kien thoi gian, thi bien flag se cho biet minh da thuc hien xong yeu cau 
-            #va thoat khoi vong lap
+        if(flag == True):
             break
 
     if(flag == False): #neu du lieu yeu cau khong xuat hien trong file
@@ -95,7 +103,7 @@ if __name__ == "__main__":
     #Bai 3
     print("Exercise 3: Xuat ra man hinh mot kim tu thap, co tham so truyen vao bang so tang, tang duoi it hon tang tren")
     level = int(input("Input level of a pyramid: "))
-    pyramid(level)
+    Pyramid(level)
 
     #Bai 4
     print("Exercise 4: Cho cac du bao thoi tiet cho 30 ngay,nhap thong tin thu - ngay - thang - nam cua hom nay de yeu cau chuong trinh dua ra du bao cua n ngay tiep theo")
