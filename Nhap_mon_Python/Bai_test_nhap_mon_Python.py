@@ -39,7 +39,7 @@ def pyramid(n):
 
 
 def weather_forecast(day,date,next_n_days):
-    read_file = open("Nhap_mon_Python/dubaothoitiet.txt","r") #mo file va chon mode doc file
+    read_file = open("C:/Code/Nhap_mon_Python/dubaothoitiet.txt","r") #mo file va chon mode doc file
     flag = False #khoi toan bien bool flag
     day_of_week = {"monday": 0, "tuesday": 1,"wednesday": 2,"thursday": 3,"friday": 4,"saturday":5, "sunday": 6}
     value_list = list(day_of_week.values()) #khoi tao 1 list chua cac value trong dictionary day_of_week
