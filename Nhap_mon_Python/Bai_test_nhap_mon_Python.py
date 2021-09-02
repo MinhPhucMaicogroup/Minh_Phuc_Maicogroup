@@ -111,7 +111,7 @@ if __name__ == "__main__":
 
     #Bai 4
     print("Bai tap 4: Cho cac du bao thoi tiet cho 30 ngay,nhap thong tin thu - ngay - thang - nam cua hom nay de yeu cau chuong trinh dua ra du bao cua n ngay tiep theo")
-    print("Cac ky hieu thoi tiet duoc chu thich trong file ky hieu.txt")
+    print("Cac ky hieu thoi tiet duoc chu thich trong file kyhieu.txt")
     print("Vi du: Today: wednesday - 11/9/2022")
     print("n = 2 ")
     print("weather forecast for 2 day: ")
