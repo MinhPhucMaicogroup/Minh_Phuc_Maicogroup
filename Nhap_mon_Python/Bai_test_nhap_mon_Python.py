@@ -27,7 +27,7 @@ def lowestCommonMultiple(first_number,second_number):
     return result
 
 
-def draw_a_pyramid(n):
+def drawPyramid(n):
     numberOfStars = 1+ 2*(n-1)
     for i in range(0,n):
         str = "" 
@@ -107,7 +107,7 @@ if __name__ == "__main__":
     #Bai 3
     print("Bai tap 3: Xuat ra man hinh mot kim tu thap, co tham so truyen vao bang so tang, tang duoi it hon tang tren")
     level = int(input("Input level of a pyramid: "))
-    draw_a_pyramid(level)
+    drawPyramid(level)
 
     #Bai 4
     print("Bai tap 4: Cho cac du bao thoi tiet cho 30 ngay,nhap thong tin thu-ngay/thang/nam cua hom nay de yeu cau chuong trinh dua ra du bao cua n ngay tiep theo")
