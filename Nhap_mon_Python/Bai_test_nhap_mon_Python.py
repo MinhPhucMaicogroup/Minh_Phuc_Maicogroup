@@ -21,9 +21,9 @@ def greatestCommonDivisor(first_number,second_number):
     return first_number+second_number
 
 
-def lowestCommonMultiply(a,b):
-    product = a*b
-    result = product//greatestCommonDivisor(a,b)
+def lowestCommonMultiple(first_number,second_number):
+    product = first_number*second_number
+    result = product//greatestCommonDivisor(first_number,second_number)
     return result
 
 
@@ -52,7 +52,7 @@ def readSymbol():
     return dicSym
 
 
-def weatherForecast(day,date,next_n_Days):
+def weatherForecast(day,date,next_n_days):
     readFile = open("Nhap_mon_Python/dubaothoitiet.txt","r") 
     flag = False 
     DAY_OF_WEEK = ("monday", "tuesday","wednesday","thursday","friday","saturday", "sunday")
@@ -102,7 +102,7 @@ if __name__ == "__main__":
     b = int(input("input b: "))
     a = abs(a) if a<0 else a
     b = abs(b) if b<0 else b
-    print(f"lowest common multiply of a and b: {lowestCommonMultiply(a,b)}")
+    print(f"lowest common multiple of a and b: {lowestCommonMultiple(a,b)}")
 
     #Bai 3
     print("Bai tap 3: Xuat ra man hinh mot kim tu thap, co tham so truyen vao bang so tang, tang duoi it hon tang tren")
@@ -110,7 +110,7 @@ if __name__ == "__main__":
     draw_a_pyramid(level)
 
     #Bai 4
-    print("Bai tap 4: Cho cac du bao thoi tiet cho 30 ngay,nhap thong tin thu - ngay - thang - nam cua hom nay de yeu cau chuong trinh dua ra du bao cua n ngay tiep theo")
+    print("Bai tap 4: Cho cac du bao thoi tiet cho 30 ngay,nhap thong tin thu-ngay/thang/nam cua hom nay de yeu cau chuong trinh dua ra du bao cua n ngay tiep theo")
     print("Cac ky hieu thoi tiet duoc chu thich trong file kyhieu.txt")
     print("Vi du: Today: wednesday - 11/9/2022")
     print("n = 2 ")
