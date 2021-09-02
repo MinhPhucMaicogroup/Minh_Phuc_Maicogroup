@@ -1,13 +1,14 @@
-import math
 from os import read
+from math import sqrt
+from math import floor
 def checkPrimeNumber(number):
     if number == 2:
         return True
     elif number<2:
         return False
     else:
-        for i in range(2,math.floor(math.sqrt(number))+1): #kiem tra neu n chia het trong khoang tu
-            if(number%i == 0):                             #2 -> sqrt(n)
+        for i in range(2,floor(sqrt(number))+1): 
+            if(number%i == 0):                            
                 return False
     return True
 
