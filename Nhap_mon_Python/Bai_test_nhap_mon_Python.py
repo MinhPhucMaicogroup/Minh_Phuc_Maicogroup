@@ -89,11 +89,11 @@ def weatherForecast(day,date,next_n_days):
 if __name__ == "__main__":
     #Bai 1
     print("Bai tap 1: kiem tra so nguyen to, tra ve True neu do la so nguyen, nguoc lai tra ve False")
-    num = int(input("input a number: "))
-    if(checkPrimeNumber(num)== True):
-        print(f"{num} is a prime number")
+    number = int(input("input a number: "))
+    if(checkPrimeNumber(number)== True):
+        print(f"{number} is a prime number")
     else:
-        print(f"{num} is not a prime number")
+        print(f"{number} is not a prime number")
 
     #Bai 2
     print("Bai tap 2: nhap 2 so nguyen va tim boi chung nho nhat cua 2 so do")
