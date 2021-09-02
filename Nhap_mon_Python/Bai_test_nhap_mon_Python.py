@@ -12,13 +12,13 @@ def checkPrimeNumber(number):
     return True
 
 
-def greatestCommonDivisor(a,b):
-    while(a*b != 0):
-        if(a>b):
-            a%=b
+def greatestCommonDivisor(first_number,second_number):
+    while(first_number*second_number != 0):
+        if(first_number>second_number):
+            first_number%=second_number
         else:
-            b%=a
-    return a+b 
+            second_number%=first_number
+    return first_number+second_number
 
 
 def lowestCommonMultiply(a,b):
@@ -27,7 +27,7 @@ def lowestCommonMultiply(a,b):
     return result
 
 
-def DrawPyramid(n):
+def draw_a_pyramid(n):
     numberOfStars = 1+ 2*(n-1)
     for i in range(0,n):
         str = "" 
@@ -88,7 +88,7 @@ def weatherForecast(day,date,next_n_Days):
 
 if __name__ == "__main__":
     #Bai 1
-    print("Exercise 1: kiem tra so nguyen to, tra ve True neu do la so nguyen, nguoc lai tra ve False")
+    print("Bai tap 1: kiem tra so nguyen to, tra ve True neu do la so nguyen, nguoc lai tra ve False")
     num = int(input("input a number: "))
     if(checkPrimeNumber(num)== True):
         print(f"{num} is a prime number")
@@ -96,7 +96,7 @@ if __name__ == "__main__":
         print(f"{num} is not a prime number")
 
     #Bai 2
-    print("Exercise 2: nhap 2 so nguyen va tim boi chung nho nhat cua 2 so do")
+    print("Bai tap 2: nhap 2 so nguyen va tim boi chung nho nhat cua 2 so do")
     print("Input 2 numbers a and b: ")
     a = int(input("input a: "))
     b = int(input("input b: "))
@@ -105,12 +105,12 @@ if __name__ == "__main__":
     print(f"lowest common multiply of a and b: {lowestCommonMultiply(a,b)}")
 
     #Bai 3
-    print("Exercise 3: Xuat ra man hinh mot kim tu thap, co tham so truyen vao bang so tang, tang duoi it hon tang tren")
+    print("Bai tap 3: Xuat ra man hinh mot kim tu thap, co tham so truyen vao bang so tang, tang duoi it hon tang tren")
     level = int(input("Input level of a pyramid: "))
-    DrawPyramid(level)
+    draw_a_pyramid(level)
 
     #Bai 4
-    print("Exercise 4: Cho cac du bao thoi tiet cho 30 ngay,nhap thong tin thu - ngay - thang - nam cua hom nay de yeu cau chuong trinh dua ra du bao cua n ngay tiep theo")
+    print("Bai tap 4: Cho cac du bao thoi tiet cho 30 ngay,nhap thong tin thu - ngay - thang - nam cua hom nay de yeu cau chuong trinh dua ra du bao cua n ngay tiep theo")
     print("Cac ky hieu thoi tiet duoc chu thich trong file ky hieu.txt")
     print("Vi du: Today: wednesday - 11/9/2022")
     print("n = 2 ")
