@@ -37,6 +37,7 @@ def DrawPyramid(n):
             str+= "*"
         print(str)
 
+
 def readSymbol():
     readFile = open("Nhap_mon_Python/kyhieu.txt","r")
     dicSym = dict()
