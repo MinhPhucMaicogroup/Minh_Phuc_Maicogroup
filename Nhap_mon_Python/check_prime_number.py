@@ -15,7 +15,7 @@ def check_prime_number(number):
 
 print("Bai tap 1: kiem tra so nguyen to, tra ve True neu do la so nguyen to, nguoc lai tra ve False")
 number = int(input("input a number: "))
-if(check_prime_number(number)== True):
+if(check_prime_number(number) == True):
     print(f"{number} is a prime number")
 else:
     print(f"{number} is not a prime number")

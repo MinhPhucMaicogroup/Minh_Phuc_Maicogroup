@@ -1,5 +1,5 @@
 def draw_nth_pyramid(level):
-    number_of_stars = 1+ 2*(level-1)
+    number_of_stars = 1 + 2*(level-1)
     for i in range(0,level):
         stage = "" 
         for j in range(0,i):
