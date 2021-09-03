@@ -32,9 +32,9 @@ def weather_forecast(day,date, next_n_days):
                 index += 1
                 if(index == 7):
                     index = 0
-                arr = list_forecast[j].split(':')
-                arr[1] = weather[arr[1]]
-                list_forecast[j] = ':'.join(arr)
+                following_date, syntax = list_forecast[j].split(':')
+                syntax = weather[syntax]
+                list_forecast[j] = ':'.join([following_date,syntax])
                 print(f"{day_in_week[index]} - {list_forecast[j]}")
         if(flag == True):
             break
