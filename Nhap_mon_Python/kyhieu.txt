@@ -1,5 +1,0 @@
-S: sunny
-C: cloudy
-D: drizzle
-F: fog
-R: rain
