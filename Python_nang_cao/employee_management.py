@@ -87,11 +87,13 @@ Position: {self.position} - Skills: {self.skill} - Started: {self.started}"
                 
 
 class TechEmployee(Employee):
+    list_of_employee = []
 
     def __init__(self, name, birth, position, skill, started, languages, projects):
         super().__init__(name, birth, position, skill, started)
         self.languages = languages
         self.projects = projects
+        TechEmployee.recruit_employee(self)
     
     def __lt__(self, other):
         return not self > other
@@ -119,7 +121,7 @@ Languages: {self.languages} - Projects: {self.projects}"
             if proj_demand(ele.projects) and ele.get_age() >= 30:
                 experienced_list.append(ele)
         return experienced_list
-
+    
 
 # Test case Employee
 employee1 = Employee("Do Ngoc An", 1995, "Sales Team", 30, 2020)
@@ -143,21 +145,18 @@ employee18 = Employee("Nguyen Duc Cuong", 1993, "BI Team", 7, 2017)
 employee19 = Employee("Nguyen Minh Hang", 1996, "IT Team", 17, 2013)
 employee20 = Employee("Khac Hung", 1992, "Telesales Team", 14, 2016)
 
-result =  Employee.three_best_employee()
-[print(ele) for ele in result]
-print("")
 
 # Test Case Tech Team
-employ1 = TechEmployee("Nguyen Minh Phuc", 2002, "AI Team", 10, 2021,"Python, C++", 6)
+employ1 = TechEmployee("Nguyen Minh Phuc", 2002, "AI Team", 10, 2021,"C++", 6)
 employ2 = TechEmployee("Nguyen Ngoc An", 2002, "IT Team", 10, 2021, "C", 10)
-employ3 = TechEmployee("Do Ngoc Cuong", 1985, "BI Team", 15, 2020, "Python, C#", 7)
-employ4 = TechEmployee("Ho Gia Bao", 1989, "IT Team", 10, 2020, "Python, Java", 8)
-employ5 = TechEmployee("Ngo Dinh", 1970, "AI Team", 15, 2021, "Python, Javascript", 9)
+employ3 = TechEmployee("Do Ngoc Cuong", 1985, "BI Team", 15, 2020, "C#", 7)
+employ4 = TechEmployee("Ho Gia Bao", 1989, "IT Team", 10, 2020, "Java", 8)
+employ5 = TechEmployee("Ngo Dinh", 1970, "AI Team", 15, 2021, "Javascript", 9)
 employ6 = TechEmployee("Nguyen Phuong Thao", 1975, "BI Team", 20, 2021, "Javascript", 10)
 employ7 = TechEmployee("Vo Hoang Ngan", 2002, "AI Team", 25, 2021, "Python", 12)
 employ8 = TechEmployee("Tieu Vy", 2001, "BI Team", 15, 2021, "C++", 20)
 employ9 = TechEmployee("Nguyen Ngoc Nguyen", 1970, "IT Team", 20, 2021, "Javascript", 7)
-employ10 = TechEmployee("Do Quoc Trung", 1995, "AI Team", 30, 2021, "Python, Java", 3)
+employ10 = TechEmployee("Do Quoc Trung", 1995, "AI Team", 30, 2021, "Java", 3)
 employ11 = TechEmployee("Nguyen Bao Han", 1970, "AI Team", 15, 2021, "C#", 1)
 employ12 = TechEmployee("Nguyen Minh Hieu", 1970, "AI Team", 15, 2021, "R, Python", 2)
 employ13 = TechEmployee("Nguyen Tam Nhu", 2003, "IT Team", 20, 2020, "Ruby", 4)
