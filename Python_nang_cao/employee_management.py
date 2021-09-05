@@ -63,7 +63,10 @@ Position: {self.position} - Skills: {self.skill} - Started: {self.started}"
             elif third < cls.employees[i]:
                 third = cls.employees[i]
         return (first, second, third)
-                
+    
+    @classmethod
+    def print_team(cls):
+        [print(member) for member in cls.employees]
 
 class TechEmployee(Employee):
     employees = []
@@ -73,9 +76,6 @@ class TechEmployee(Employee):
         self.prog_lang = prog_lang
         self.projects = projects
         TechEmployee.recruit_employee(self)
-    
-    def __lt__(self, other):
-        return not self > other
 
     @classmethod
     def python_team(cls):
@@ -99,7 +99,7 @@ Languages: {self.prog_lang} - Projects: {self.projects}"
             if proj_demand(ele.projects) and ele.get_age() >= 30:
                 experienced_team.append(ele)
         return experienced_team
-    
+
 
 # Test case Employee
 employee1 = Employee("Do Ngoc An", 1995, "Sales Team", 30, 2020)
