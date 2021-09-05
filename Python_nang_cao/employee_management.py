@@ -1,10 +1,10 @@
 from typing import TYPE_CHECKING, List
 
 class Employee:
-    list_of_employee = []
+    employees = []
     @classmethod
     def recruit_employee(cls, ele):
-        cls.list_of_employee.append(ele)
+        cls.employees.append(ele)
 
     def __init__(self, name="anonymous", birth=0, position="Internship", skill=0, started=0):
         self.name = name.strip()
@@ -47,51 +47,30 @@ Position: {self.position} - Skills: {self.skill} - Started: {self.started}"
         except:
             print("Invalid age !!")
 
-    @staticmethod
-    def sort(container, reverse=True):
-        for index in range(1,len(container)):
-            prev = index - 1
-            target = container[index]
-            if(reverse == True):
-                while prev >=0 and target < container[prev]:
-                    container[prev+1] = container[prev]
-                    prev -= 1
-                container[prev+1] = target
-            else:
-                while prev >=0 and target > container[prev]:
-                    container[prev+1] = container[prev]
-                    prev -= 1
-                container[prev+1] = target
-        return container
-
-    @classmethod
-    def sort_employee(cls):
-        return cls.sort(cls.list_of_employee)
-
     @classmethod
     def three_best_employee(cls):
-        first = cls.list_of_employee[0]
+        first = cls.employees[0]
         second = Employee()
         third = Employee()
-        for i in range(1,len(cls.list_of_employee)):
-            if cls.list_of_employee[i] > first:
+        for i in range(1,len(cls.employees)):
+            if cls.employees[i] > first:
                 third = second
                 second = first
-                first = cls.list_of_employee[i]
-            elif cls.list_of_employee[i] > second:
+                first = cls.employees[i]
+            elif cls.employees[i] > second:
                 third = second
-                second = cls.list_of_employee[i]
-            elif third < cls.list_of_employee[i]:
-                third = cls.list_of_employee[i]
+                second = cls.employees[i]
+            elif third < cls.employees[i]:
+                third = cls.employees[i]
         return (first, second, third)
                 
 
 class TechEmployee(Employee):
-    list_of_employee = []
+    employees = []
 
-    def __init__(self, name, birth, position, skill, started, languages, projects):
+    def __init__(self, name, birth, position, skill, started, prog_lang, projects):
         super().__init__(name, birth, position, skill, started)
-        self.languages = languages
+        self.prog_lang = prog_lang
         self.projects = projects
         TechEmployee.recruit_employee(self)
     
@@ -100,27 +79,26 @@ class TechEmployee(Employee):
 
     @classmethod
     def python_team(cls):
-        is_python = lambda languages: "Python" in languages
-        python_list = []
-        for tech_employee in cls.list_of_employee:
-            if is_python(tech_employee.languages):
-                python_list.append(tech_employee)
-        python_list = cls.sort(python_list, reverse=False)
-        return python_list
+        is_python_dev = lambda prog_lang: "Python" in prog_lang
+        python_team = []
+        for tech_employee in cls.employees:
+            if is_python_dev(tech_employee.prog_lang):
+                python_team.append(tech_employee)
+        return python_team
     
     def __repr__(self):
         return f"Name: {self.name} - Birth: {self.birth} - \
 Position: {self.position} - Skills: {self.skill} - Started: {self.started} - \
-Languages: {self.languages} - Projects: {self.projects}"
+Languages: {self.prog_lang} - Projects: {self.projects}"
 
     @classmethod
     def experienced_team(cls):
         proj_demand = lambda proj: proj > 5
-        experienced_list = []
-        for ele in cls.list_of_employee:
+        experienced_team = []
+        for ele in cls.employees:
             if proj_demand(ele.projects) and ele.get_age() >= 30:
-                experienced_list.append(ele)
-        return experienced_list
+                experienced_team.append(ele)
+        return experienced_team
     
 
 # Test case Employee
@@ -145,7 +123,9 @@ employee18 = Employee("Nguyen Duc Cuong", 1993, "BI Team", 7, 2017)
 employee19 = Employee("Nguyen Minh Hang", 1996, "IT Team", 17, 2013)
 employee20 = Employee("Khac Hung", 1992, "Telesales Team", 14, 2016)
 
-
+three_best_player = Employee.three_best_employee()
+[print(chosen_mem) for chosen_mem in three_best_player]
+print("")
 # Test Case Tech Team
 employ1 = TechEmployee("Nguyen Minh Phuc", 2002, "AI Team", 10, 2021,"C++", 6)
 employ2 = TechEmployee("Nguyen Ngoc An", 2002, "IT Team", 10, 2021, "C", 10)
