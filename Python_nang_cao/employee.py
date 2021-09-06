@@ -12,7 +12,8 @@ class Employee:
         self.position = position.strip()
         self.skill = int(skill)
         self.started = int(started)
-        Employee.recruit_employee(self)
+        if self.name != "anonymous":
+            Employee.recruit_employee(self)
 
     def __repr__(self):
         return f"Name: {self.name} - Birth: {self.birth} - \
@@ -96,4 +97,5 @@ str = str.center(130,"-")
 print(str)
 three_best_player = Employee.three_best_employee()
 [print(chosen_mem) for chosen_mem in three_best_player]
-# Test Case Tech Team
+
+Employee.print_team()
