@@ -31,6 +31,7 @@ Languages: {self.prog_lang} - Projects: {self.projects}"
                 experienced_team.append(ele)
         return experienced_team
 
+
 employee21 = TechEmployee("Nguyen Minh Phuc", 2002, "AI Team", 10, 2021,"C++", 6)
 employee22 = TechEmployee("Nguyen Ngoc An", 2002, "IT Team", 10, 2021, "C", 10)
 employee23 = TechEmployee("Do Ngoc Cuong", 1985, "BI Team", 15, 2020, "C#", 7)

@@ -98,4 +98,3 @@ print(str)
 three_best_player = Employee.three_best_employee()
 [print(chosen_mem) for chosen_mem in three_best_player]
 
-Employee.print_team()
