@@ -1,33 +1,34 @@
 from employee import Employee
+
 class TechEmployee(Employee):
-    employees = []
+    _employees = []
     
     def __init__(self, name, birth, position, skill, started, prog_lang, projects):
         super().__init__(name, birth, position, skill, started)
-        self.prog_lang = prog_lang
-        self.projects = projects
+        self.__prog_lang = prog_lang
+        self.__projects = projects
         TechEmployee.recruit_employee(self)
+
+    def __repr__(self):
+        return f"Name: {self._name} - Birth: {self._birth} - \
+Position: {self._position} - Skills: {self._skill} - Started: {self._started} - \
+Languages: {self.__prog_lang} - Projects: {self.__projects}"
 
     @classmethod
     def python_team(cls):
         is_python_dev = lambda prog_lang: "Python" in prog_lang
         python_team = []
-        for tech_employee in cls.employees:
-            if is_python_dev(tech_employee.prog_lang):
+        for tech_employee in cls._employees:
+            if is_python_dev(tech_employee.__prog_lang):
                 python_team.append(tech_employee)
         return python_team
-    
-    def __repr__(self):
-        return f"Name: {self.name} - Birth: {self.birth} - \
-Position: {self.position} - Skills: {self.skill} - Started: {self.started} - \
-Languages: {self.prog_lang} - Projects: {self.projects}"
 
     @classmethod
     def experienced_team(cls):
         proj_demand = lambda proj: proj > 5
         experienced_team = []
-        for ele in cls.employees:
-            if proj_demand(ele.projects) and ele.get_age() >= 30:
+        for ele in cls._employees:
+            if proj_demand(ele.__projects) and ele.get_age() >= 30:
                 experienced_team.append(ele)
         return experienced_team
 

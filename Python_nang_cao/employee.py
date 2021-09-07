@@ -1,31 +1,28 @@
 from typing import TYPE_CHECKING, List
 
 class Employee:
-    employees = []
-    @classmethod
-    def recruit_employee(cls, ele):
-        cls.employees.append(ele)
-
+    _employees = []
+    
     def __init__(self, name="anonymous", birth=0, position="Internship", skill=0, started=0):
-        self.name = name.strip()
-        self.birth = int(birth)
-        self.position = position.strip()
-        self.skill = int(skill)
-        self.started = int(started)
-        if self.name != "anonymous":
+        self._name = name.strip()
+        self._birth = int(birth)
+        self._position = position.strip()
+        self._skill = int(skill)
+        self._started = int(started)
+        if self._name != "anonymous":
             Employee.recruit_employee(self)
 
     def __repr__(self):
-        return f"Name: {self.name} - Birth: {self.birth} - \
-Position: {self.position} - Skills: {self.skill} - Started: {self.started}"
+        return f"Name: {self._name} - Birth: {self._birth} - \
+Position: {self._position} - Skills: {self._skill} - Started: {self._started}"
 
     def __gt__(self, other):
-        if self.skill > other.skill:
+        if self._skill > other._skill:
             return True
-        elif self.skill == other.skill:
-            name_split = self.name.split()
+        elif self._skill == other._skill:
+            name_split = self._name.split()
             last_name = name_split[len(name_split)-1]
-            other_split = other.name.split()
+            other_split = other._name.split()
             other_last_name = other_split[len(other_split)-1]
             name_split.clear()
             other_split.clear()
@@ -35,13 +32,13 @@ Position: {self.position} - Skills: {self.skill} - Started: {self.started}"
                 return False
         else:
             return False
-    
+
     def __lt__(self, other):
         return not self > other
 
     def get_age(self):
         try:
-            age = 2021 - self.birth
+            age = 2021 - self._birth
             if age >= 100 or age < 0:
                 raise Exception
             return age
@@ -49,25 +46,29 @@ Position: {self.position} - Skills: {self.skill} - Started: {self.started}"
             print("Invalid age !!")
 
     @classmethod
+    def recruit_employee(cls, ele):
+        cls._employees.append(ele)
+
+    @classmethod
     def three_best_employee(cls):
-        first = cls.employees[0]
+        first = cls._employees[0]
         second = Employee()
         third = Employee()
-        for i in range(1,len(cls.employees)):
-            if cls.employees[i] > first:
+        for i in range(1,len(cls._employees)):
+            if cls._employees[i] > first:
                 third = second
                 second = first
-                first = cls.employees[i]
-            elif cls.employees[i] > second:
+                first = cls._employees[i]
+            elif cls._employees[i] > second:
                 third = second
-                second = cls.employees[i]
-            elif third < cls.employees[i]:
-                third = cls.employees[i]
+                second = cls._employees[i]
+            elif third < cls._employees[i]:
+                third = cls._employees[i]
         return (first, second, third)
-    
+
     @classmethod
     def print_team(cls):
-        [print(member) for member in cls.employees]
+        [print(member) for member in cls._employees]
 
 
 # Test case Employee
@@ -91,10 +92,8 @@ employee17 = Employee("Tran Phuong Tuan", 1997, "AI Team", 13, 2021)
 employee18 = Employee("Nguyen Duc Cuong", 1993, "BI Team", 7, 2017)
 employee19 = Employee("Nguyen Minh Hang", 1996, "IT Team", 17, 2013)
 employee20 = Employee("Khac Hung", 1992, "Telesales Team", 14, 2016)
-
 str = "Three Best Employee"
 str = str.center(130,"-")
 print(str)
 three_best_player = Employee.three_best_employee()
 [print(chosen_mem) for chosen_mem in three_best_player]
-
