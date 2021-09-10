@@ -1,0 +1,50 @@
+import numpy as np
+from math import sqrt
+from math import floor
+
+print("a)")
+A = np.random.randint(0, 100, (3, 4))   
+B = np.random.randint(0, 100, (4, 4))
+print("Matrix 3x4:")
+print(A)
+print("Matrix 4x4:")
+print(B)
+print("Matrix AxB:")
+print(A.dot(B))
+print("")
+
+
+print("b)")
+A = np.random.randint(0, 100, (4, 4))
+B = np.zeros(A.shape, dtype="int16")
+B[A%2 == 0] += 1
+print("Random Matrix 4x4:")
+print(A)
+print("Even Matrix:")
+print(B)
+print("")
+
+
+print("c)")
+def check_prime(number):
+    if number < 2:
+        return False
+    elif number == 2:
+        return True
+    for i in range(2, floor(sqrt(number))+1):
+        if number%i == 0:
+            return False
+    return True
+
+A = np.random.randint(0, 100, (5, 5))
+print("Random 5x5 Matrix: ")
+print(A)
+print("After rotate left:")
+A = np.roll(A, -1)
+print(A)
+diagonal = np.diag(A)
+print("Diagonal array:")
+print(diagonal)
+vectorize = np.vectorize(check_prime)
+result = vectorize(diagonal)
+print("Number of Prime Numbers:", np.count_nonzero(result))
