@@ -8,14 +8,18 @@ print(data_set.head(50))
 print("")
 print("Date:")
 print(data_set["Date"])
+print("")
 print("Calories (kcal):")
 print(data_set["Calories (kcal)"])
+print("")
 print("Distance (m):")
 print(data_set["Distance (m)"])
+print("")
 
 for index, value in data_set["Active Minutes"].items():
     if value > 100:
         active[index] = value 
 
+print("Active Dictionary: ")
 print(active)
 
