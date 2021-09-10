@@ -1,31 +1,18 @@
 import numpy as np
 from math import sqrt
 from math import floor
+from numpy.lib.twodim_base import diag
 
-print("a)")
-A = np.random.randint(0, 100, (3, 4))   
-B = np.random.randint(0, 100, (4, 4))
-print("Matrix 3x4:")
-print(A)
-print("Matrix 4x4:")
-print(B)
-print("Matrix AxB:")
-print(A.dot(B))
-print("")
+def mat_mul(A, B):
+    return A.dot(B)
 
 
-print("b)")
-A = np.random.randint(0, 100, (4, 4))
-B = np.zeros(A.shape, dtype="int16")
-B[A%2 == 0] += 1
-print("Random Matrix 4x4:")
-print(A)
-print("Even Matrix:")
-print(B)
-print("")
+def even_mat(A):
+    B = np.zeros(A.shape, dtype="int16")
+    B[A%2 == 0] += 1
+    return B
 
 
-print("c)")
 def check_prime(number):
     if number < 2:
         return False
@@ -36,7 +23,28 @@ def check_prime(number):
             return False
     return True
 
+
+A = np.random.randint(0, 100, (3, 4))
+B = np.random.randint(0, 100, (4, 4))
+print("a)")
+print("Matrix 3x4:")
+print(A)
+print("Matrix 4x4:")
+print(B)
+print("Matrix AxB:")
+print(mat_mul(A, B))
+print("")
+
+A = np.random.randint(0, 100, (4, 4))
+print("b)")
+print("Random matrix 4x4:")
+print(A)
+print("Even Matrix:")
+print(even_mat(A))
+print("")
+
 A = np.random.randint(0, 100, (5, 5))
+print("c)")
 print("Random 5x5 Matrix: ")
 print(A)
 print("After rotate left:")
@@ -48,3 +56,5 @@ print(diagonal)
 vectorize = np.vectorize(check_prime)
 result = vectorize(diagonal)
 print("Number of Prime Numbers:", np.count_nonzero(result))
+
+
