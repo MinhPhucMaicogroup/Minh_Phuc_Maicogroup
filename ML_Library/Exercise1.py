@@ -48,7 +48,7 @@ print("c)")
 print("Random 5x5 Matrix: ")
 print(A)
 print("After rotate left:")
-A = np.roll(A, -1)
+A[:, :] = A[:, ::-1]
 print(A)
 diagonal = np.diag(A)
 print("Diagonal array:")
