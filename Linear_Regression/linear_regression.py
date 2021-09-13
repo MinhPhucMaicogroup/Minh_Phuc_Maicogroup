@@ -14,10 +14,10 @@ training_set = data_set.head(160)
 testing_set = data_set.tail(40)
 # Finding coefficients
 x_bar = training_set['x'].to_numpy().reshape((160, 1))
-xbar = concatenate(x_bar)
+x_bar = concatenate(x_bar)
 y_training = training_set['y'].to_numpy().reshape((160, 1))
-x_tranpose = xbar.T
-A = np.dot(x_tranpose, xbar)
+x_tranpose = x_bar.T
+A = np.dot(x_tranpose, x_bar)
 b = np.dot(x_tranpose, y_training)
 A_inverse = np.linalg.pinv(A)
 W = np.dot(A_inverse, b)
