@@ -21,7 +21,7 @@ A = np.dot(x_tranpose, xbar)
 b = np.dot(x_tranpose, y_training)
 A_inverse = np.linalg.pinv(A)
 W = np.dot(A_inverse, b)
-# Find minium Error 
+# Finding minium Error 
 x_test = testing_set['x'].to_numpy().reshape((40, 1))
 x_test = concatenate(x_test)
 y_hat = np.dot(x_test, W)
