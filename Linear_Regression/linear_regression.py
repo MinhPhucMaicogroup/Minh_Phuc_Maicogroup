@@ -11,11 +11,10 @@ def coefficient(x, y):
     return coeffs
 
 
-def concatenate(x):
+def add_one(x):
     one = np.ones((x.shape[0], 1))
     x = np.concatenate((x, one), axis=1)
     return x
-
 
 
 data_set = pd.read_csv("Linear_Regression/linear_regression.csv")
@@ -24,20 +23,20 @@ test_set = data_set.tail(40)
 
 x_train = np.array(train_set['x'].values)
 x_train = x_train.reshape((160, 1))
-x_train = concatenate(x_train)
+x_train = add_one(x_train)
 y_train = np.array(train_set['y'].values)
 y_train = y_train.reshape((160, 1))
 coeffs = coefficient(x_train, y_train)
 
 x_output = np.array(test_set['x'].values)
 x_output = x_output.reshape((40, 1))
-x_output = concatenate(x_output)
+x_output = add_one(x_output)
 model = np.dot(x_output, coeffs)
 y_output = np.array(test_set['y'].values)
 y_output = y_output.reshape((40, 1))
 least_square = lambda output, model: ((np.linalg.norm(output - model))**2)/2
 error_term = least_square(y_output, model)
-print("Error term: ", error_term)
+print(f"Error term: {error_term:.3f}")
 
 x_axis = np.linspace(-3, 7)
 intercept = coeffs[1][0]
