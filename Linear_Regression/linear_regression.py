@@ -16,9 +16,8 @@ testing_set = data_set.tail(40)
 x_bar = training_set['x'].to_numpy().reshape((160, 1))
 x_bar = concatenate(x_bar)
 y_training = training_set['y'].to_numpy().reshape((160, 1))
-x_tranpose = x_bar.T
-A = np.dot(x_tranpose, x_bar)
-b = np.dot(x_tranpose, y_training)
+A = np.dot(x_bar.T, x_bar)
+b = np.dot(x_bar.T, y_training)
 A_inverse = np.linalg.pinv(A)
 W = np.dot(A_inverse, b)
 # Finding minium Error 
