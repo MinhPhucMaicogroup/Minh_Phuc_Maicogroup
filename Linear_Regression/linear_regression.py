@@ -20,6 +20,7 @@ def add_one(x):
 data_set = pd.read_csv("Linear_Regression/linear_regression.csv")
 train_set = data_set.head(160)
 test_set = data_set.tail(40)
+least_square = lambda output, model: ((np.linalg.norm(output - model))**2)/2
 
 x_train = np.array(train_set['x'].values)
 x_train = x_train.reshape((160, 1))
@@ -34,7 +35,6 @@ x_output = add_one(x_output)
 model = np.dot(x_output, coeffs)
 y_output = np.array(test_set['y'].values)
 y_output = y_output.reshape((40, 1))
-least_square = lambda output, model: ((np.linalg.norm(output - model))**2)/2
 error_term = least_square(y_output, model)
 print(f"Error term: {error_term:.3f}")
 
