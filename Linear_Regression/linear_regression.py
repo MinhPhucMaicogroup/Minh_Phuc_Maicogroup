@@ -11,7 +11,7 @@ def coefficient(x, y):
     return coeffs
 
 
-def add_one(x):
+def append_one(x):
     one = np.ones((x.shape[0], 1))
     x = np.concatenate((x, one), axis=1)
     return x
@@ -24,14 +24,14 @@ compute_cost = lambda output, model: ((np.linalg.norm(output - model))**2)/2
 
 x_train = np.array(train_set['x'].values)
 x_train = x_train.reshape((160, 1))
-x_train = add_one(x_train)
+x_train = append_one(x_train)
 y_train = np.array(train_set['y'].values)
 y_train = y_train.reshape((160, 1))
 coeffs = coefficient(x_train, y_train)
 
 x_output = np.array(test_set['x'].values)
 x_output = x_output.reshape((40, 1))
-x_output = add_one(x_output)
+x_output = append_one(x_output)
 model = np.dot(x_output, coeffs)
 y_output = np.array(test_set['y'].values)
 y_output = y_output.reshape((40, 1))
