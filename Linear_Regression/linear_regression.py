@@ -3,34 +3,47 @@ from pandas.io.sql import table_exists
 import numpy as np
 import matplotlib.pyplot as plt
 
+def coefficient(x, y):
+    dot_square = np.dot(x.T, x)
+    dot_prod = np.dot(x.T, y)
+    inverse = np.linalg.pinv(dot_square)
+    coeffs = np.dot(inverse, dot_prod)
+    return coeffs
+
+
 def concatenate(x):
     one = np.ones((x.shape[0], 1))
     x = np.concatenate((x, one), axis=1)
     return x
 
 
+
 data_set = pd.read_csv("Linear_Regression/linear_regression.csv")
-training_set = data_set.head(160)
-testing_set = data_set.tail(40)
-# Finding coefficients
-x_bar = training_set['x'].to_numpy().reshape((160, 1))
-x_bar = concatenate(x_bar)
-y_training = training_set['y'].to_numpy().reshape((160, 1))
-A = np.dot(x_bar.T, x_bar)
-b = np.dot(x_bar.T, y_training)
-A_inverse = np.linalg.pinv(A)
-W = np.dot(A_inverse, b)
-# Finding minium Error 
-x_test = testing_set['x'].to_numpy().reshape((40, 1))
-x_test = concatenate(x_test)
-y_hat = np.dot(x_test, W)
-output = testing_set['y'].to_numpy().reshape((40, 1))
-error = round((np.linalg.norm(output - y_hat)**2)/2, 5)
+train_set = data_set.head(160)
+test_set = data_set.tail(40)
+
+x_train = np.array(train_set['x'].values)
+x_train = x_train.reshape((160, 1))
+x_train = concatenate(x_train)
+y_train = np.array(train_set['y'].values)
+y_train = y_train.reshape((160, 1))
+coeffs = coefficient(x_train, y_train)
+
+x_output = np.array(test_set['x'].values)
+x_output = x_output.reshape((40, 1))
+x_output = concatenate(x_output)
+model = np.dot(x_output, coeffs)
+y_output = np.array(test_set['y'].values)
+y_output = y_output.reshape((40, 1))
+least_square = lambda output, model: ((np.linalg.norm(output - model))**2)/2
+error_term = least_square(y_output, model)
+print("Error term: ", error_term)
+
 x_axis = np.linspace(-3, 7)
-y_axis = W[0][0]*x_axis + W[1][0]
-print("Minium Error: ", error)
-#Visualize the Fitting Line
-plt.plot(x_axis, y_axis, label=f"y = {round(W[0][0], 1)}x + {round(W[1][0], 1)}")
+intercept = coeffs[1][0]
+slope = coeffs[0][0]
+y_axis = slope*x_axis + intercept 
+plt.plot(x_axis, y_axis, label=f"y = {slope:.1f}x + {intercept:.0f}")
 plt.scatter(data_set['x'], data_set['y'], c='r')
 plt.xlabel("X axes")
 plt.title("Linear Regression")
