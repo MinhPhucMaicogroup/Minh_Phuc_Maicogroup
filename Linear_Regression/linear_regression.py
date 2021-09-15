@@ -16,25 +16,25 @@ def append_one(x):
     x = np.concatenate((x, one), axis=1)
     return x
 
+def to_2dnumpy(series):
+    arr = series.to_numpy()
+    arr = arr.reshape(arr.shape[0], 1)
+    return arr
 
 data_set = pd.read_csv("Linear_Regression/linear_regression.csv")
 train_set = data_set.head(160)
 test_set = data_set.tail(40)
 compute_cost = lambda output, model: ((np.linalg.norm(output - model))**2)/2
 
-x_train = np.array(train_set['x'].values)
-x_train = x_train.reshape((160, 1))
+x_train = to_2dnumpy(train_set["x"])
 x_train = append_one(x_train)
-y_train = np.array(train_set['y'].values)
-y_train = y_train.reshape((160, 1))
+y_train = to_2dnumpy(train_set["y"])
 coeffs = coefficient(x_train, y_train)
 
-x_output = np.array(test_set['x'].values)
-x_output = x_output.reshape((40, 1))
+x_output = to_2dnumpy(test_set["x"])
 x_output = append_one(x_output)
 model = np.dot(x_output, coeffs)
-y_output = np.array(test_set['y'].values)
-y_output = y_output.reshape((40, 1))
+y_output = to_2dnumpy(test_set["y"])
 cost = compute_cost(y_output, model)
 print(f"Error term: {cost:.3f}")
 
