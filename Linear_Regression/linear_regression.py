@@ -27,7 +27,6 @@ class LinearRegression:
         except:
             print('Model not trained yet')
 
-    
     def get_intercept(self):
         try:
             if self.__intercept == None:
