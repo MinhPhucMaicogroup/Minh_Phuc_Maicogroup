@@ -1,56 +1,76 @@
+from numpy.lib.function_base import append
 import pandas as pd
 from pandas.io.sql import table_exists
 import numpy as np
 import matplotlib.pyplot as plt
 
-def coefficient(x, y):
-    dot_square = np.dot(x.T, x)
-    dot_prod = np.dot(x.T, y)
-    inverse = np.linalg.pinv(dot_square)
-    coeffs = np.dot(inverse, dot_prod)
-    return coeffs
+class LinearRegression:
+    def __init__(self):
+        self.__coefficient = None
+        self.__intercept = None
+    
+    def __append__one(self, x):
+        one = np.ones((x.shape[0], 1))
+        x = np.concatenate((x, one), axis=1)
+        return x
+    
+    def __to__matrix(self, data):
+        matrx = data.to_numpy()
+        matrx = matrx.reshape(data.shape[0], 1)
+        return matrx
 
+    def get_slope(self):
+        return self.__coefficient
+    
+    def get_intercept(self):
+        return self.__intercept
 
-def append_one(x):
-    one = np.ones((x.shape[0], 1))
-    x = np.concatenate((x, one), axis=1)
-    return x
+    def fit(self, x_train, y_train):
+        x_train = self.__to__matrix(x_train)
+        x_train = self.__append__one(x_train)
+        y_train = self.__to__matrix(y_train)
+        prod = np.dot(x_train.T, x_train)
+        inner_prod = np.dot(x_train.T, y_train)
+        inverse = np.linalg.pinv(prod)
+        coeffs = np.dot(inverse, inner_prod)
+        self.__intercept = coeffs[1][0]
+        self.__coefficient = coeffs[0][0]
+    
+    def predict(self, x_test):
+        col_coefficients = np.array([[self.__coefficient, self.__intercept]]).T
+        predict = np.dot(x_test, col_coefficients)
+        return predict
+    
+    def compute_cost(self, x_test, y_test):
+        x_test = self.__to__matrix(x_test)
+        x_test = self.__append__one(x_test)
+        y_test = self.__to__matrix(y_test)
+        model = self.predict(x_test)
+        cost = ((np.linalg.norm(y_test - model))**2)/2
+        return cost
 
-
-def to_matrix(series):
-    matrx = series.to_numpy()
-    matrx = matrx.reshape(matrx.shape[0], 1)
-    return matrx
+    def visualize(self, data_set):
+        x_axis = np.linspace(-3, 7)
+        y_axis = self.__coefficient*x_axis + self.__intercept 
+        plt.plot(x_axis, y_axis, label=f"y = {self.__coefficient:.1f}x + {self.__intercept:.0f}")
+        plt.scatter(data_set['x'], data_set['y'], c='r')
+        plt.xlabel("X axes")
+        plt.title("Linear Regression")
+        plt.ylabel("Y axes")
+        plt.legend()
+        plt.show()
 
 
 data_set = pd.read_csv("Linear_Regression/linear_regression.csv")
 train_set = data_set.head(160)
 test_set = data_set.tail(40)
-compute_cost = lambda output, model: ((np.linalg.norm(output - model))**2)/2
 
-x_train = to_matrix(train_set["x"])
-x_train = append_one(x_train)
-y_train = to_matrix(train_set["y"])
-coeffs = coefficient(x_train, y_train)
-
-x_output = to_matrix(test_set["x"])
-x_output = append_one(x_output)
-model = np.dot(x_output, coeffs)
-y_output = to_matrix(test_set["y"])
-cost = compute_cost(y_output, model)
-print(f"Error term: {cost:.3f}")
-
-x_axis = np.linspace(-3, 7)
-intercept = coeffs[1][0]
-slope = coeffs[0][0]
-y_axis = slope*x_axis + intercept 
-plt.plot(x_axis, y_axis, label=f"y = {slope:.1f}x + {intercept:.0f}")
-plt.scatter(data_set['x'], data_set['y'], c='r')
-plt.xlabel("X axes")
-plt.title("Linear Regression")
-plt.ylabel("Y axes")
-plt.legend()
-plt.show()
-
-
-
+regressor = LinearRegression()
+x_train = train_set["x"]
+y_train = train_set["y"]
+x_test = test_set["x"]
+y_test = test_set["y"]
+regressor.fit(x_train, y_train)
+error_term = regressor.compute_cost(x_test, y_test)
+print(f"Error term: {error_term:.3f}")
+regressor.visualize(data_set)
