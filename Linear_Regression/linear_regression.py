@@ -37,9 +37,14 @@ class LinearRegression:
         self.__coefficient = coeffs[0][0]
     
     def predict(self, x_test):
-        col_coefficients = np.array([[self.__coefficient, self.__intercept]]).T
-        predict = np.dot(x_test, col_coefficients)
-        return predict
+        try:
+            if self.__coefficient == None or self.__intercept == None:
+                raise Exception
+            col_coefficients = np.array([[self.__coefficient, self.__intercept]]).T
+            predict = np.dot(x_test, col_coefficients)
+            return predict
+        except:
+            print('Model not trained yet')
     
     def compute_cost(self, x_test, y_test):
         x_test = self.__to__matrix(x_test)
