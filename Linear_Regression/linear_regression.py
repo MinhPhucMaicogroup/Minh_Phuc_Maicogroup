@@ -64,11 +64,12 @@ class LinearRegression:
         cost = ((np.linalg.norm(y_test - model))**2)/2
         return cost
 
-    def visualize(self, data_set):
+    def visualize(self, train_set, test_set):
         x_axis = np.linspace(-3, 7)
         y_axis = self.__coefficient*x_axis + self.__intercept 
-        plt.plot(x_axis, y_axis, label=f"y = {self.__coefficient:.1f}x + {self.__intercept:.0f}")
-        plt.scatter(data_set['x'], data_set['y'], c='r')
+        plt.plot(x_axis, y_axis, label=f"y = {self.__coefficient:.1f}x + {self.__intercept:.0f}", color="black")
+        plt.scatter(train_set['x'], train_set['y'], c='r', label="Train Set")
+        plt.scatter(test_set['x'], test_set['y'], c='b', label="Test Set")
         plt.xlabel("X axes")
         plt.title("Linear Regression")
         plt.ylabel("Y axes")
@@ -88,4 +89,4 @@ y_test = test_set["y"]
 regressor.fit(x_train, y_train)
 error_term = regressor.compute_cost(x_test, y_test)
 print(f"Error term: {error_term:.3f}")
-regressor.visualize(data_set)
+regressor.visualize(train_set, test_set)
