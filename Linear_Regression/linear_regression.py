@@ -20,10 +20,21 @@ class LinearRegression:
         return matrx
 
     def get_slope(self):
-        return self.__coefficient
+        try:
+            if self.__coefficient == None:
+                raise Exception
+            return self.__coefficient
+        except:
+            print('Model not trained yet')
+
     
     def get_intercept(self):
-        return self.__intercept
+        try:
+            if self.__intercept == None:
+                raise Exception
+            return self.__intercept
+        except:
+            print('Model not trained yet')
 
     def fit(self, x_train, y_train):
         x_train = self.__to__matrix(x_train)
