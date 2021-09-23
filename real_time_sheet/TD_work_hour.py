@@ -60,19 +60,30 @@ def insert(df, table_name):
 
 def real_time(sheets, table_name):
     sheet = sheets.worksheets()
+    connect, cursor = connect_table("sales", "postgres", "gangster123")
+    update = "TRUNCATE %s" %(table_name)
     while True:
         for sheet_id in sheet:
             time_table = pd.DataFrame()
+            checker = sheet_id.cell(6, 1).value
+            print(checker)
             for index in range(3, 12):
-                data = sheet_id.get_values("B%s:I%s"%(index, index))
+                if checker == None:
+                    data = sheet_id.get_values("B%s:I%s"%(index, index))
+                else:
+                    data = sheet_id.get_values("A%s:H%s"%(index, index))
                 data = pd.DataFrame(data)
-                time_table = time_table.append(data, ignore_index=True)
+                time_table = time_table.append(data, ignore_index=True)                
             if time_table.empty:
-                time.sleep(8)
+                time.sleep(7)
                 continue
-            insert(time_table, table_name)
             print(time_table)
-            time.sleep(8)
+            insert(time_table, table_name)
+            time.sleep(7)
+        time.sleep(120)
+        cursor.execute(update)
+        connect.commit()
+
 
 
 scope = ("https://spreadsheets.google.com/feeds","https://www.googleapis.com/auth/spreadsheets",\

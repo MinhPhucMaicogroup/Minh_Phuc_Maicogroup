@@ -7,6 +7,18 @@ import threading
 import time
 import psycopg2
 
+#class SggwSheet:
+    #def __init__(self, database, username, password, table_name):
+        #self.database = self.database
+        #self.user = username
+        #self.password = password
+        #self.table_name = table_name
+        #self.connector = psycopg2.connect(database=database, user=username, password=password)
+        
+    #def disconnect_table(self):
+        #self.
+
+
 def connect_table(dat, user, passw):
     connect = psycopg2.connect(database=dat, user=user, password=passw)
     cursor = connect.cursor()
@@ -71,14 +83,14 @@ def real_time(sheets, table_name):
                 data = pd.DataFrame(data)
                 time_table = time_table.append(data, ignore_index=True)
             if time_table.empty:
-                time.sleep(8)
+                time.sleep(10)
                 continue
             print(time_table)
             insert(time_table, table_name)
-            time.sleep(8)
+            time.sleep(10)
+        time.sleep(120)
         cursor.execute(update)
         connect.commit()
-
 
 
 scope = ("https://spreadsheets.google.com/feeds","https://www.googleapis.com/auth/spreadsheets",\
